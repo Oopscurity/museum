@@ -1,0 +1,29 @@
+{
+  "name": "museum",
+  "version": "0.0.1",
+  "description": "Virtual museum of computer science through people",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Oopscurity/museum.git"
+  },
+  "keywords": [
+    "react",
+    "redux",
+    "node",
+    "react-router",
+    "heroku",
+    "react-konva",
+    "visualization",
+    "canvas"
+  ],
+  "author": "Artem Kravchenko",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Oopscurity/museum/issues"
+  },
+  "homepage": "https://github.com/Oopscurity/museum#readme"
+}

@@ -1,4 +1,5 @@
-import reducer from '../../src/reducers';
+import tree from './tree';
 
 describe('Reducers:', () => {
+  tree();
 });

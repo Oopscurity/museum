@@ -32,6 +32,11 @@ const common = {
         exclude: /node_modules/
       },
       {
+        test: /\.json$/,
+        loader: 'json-loader',
+        exclude: /node_modules/
+      },
+      {
         test: /\.less$/,
         loader: 'style!css!autoprefixer!less',
         exclude: /node_modules/

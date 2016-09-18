@@ -1,7 +1,8 @@
 import { Map } from 'immutable';
 import { combineReducers } from 'redux-immutablejs';
 
-const reducer = combineReducers(Map({
-}));
+import tree from './tree';
 
-export default reducer;
+export default combineReducers(Map({
+  tree
+}));

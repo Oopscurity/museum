@@ -4,7 +4,7 @@ export default class App extends React.Component {
   static defaultProps = {
     children: false
   };
-  
+
   render() {
     const { children } = this.props;
 

@@ -1,37 +1,8 @@
-// ui actions
-export const RESET_UI = 'RESET_UI';
+export const SET_DATA_TREE = 'SET_DATA_TREE';
 
-export const OPEN_SIGNUP = 'OPEN_SIGNUP';
-export const CLOSE_SIGNUP = 'CLOSE_SIGNUP';
-export const OPEN_LOGIN = 'OPEN_LOGIN';
-export const CLOSE_LOGIN = 'CLOSE_LOGIN';
-
-export function resetUi() {
+export function setDataTree(tree) {
   return {
-    type: RESET_UI
-  };
-}
-
-export function openSignup() {
-  return {
-    type: OPEN_SIGNUP
-  };
-}
-
-export function closeSignup() {
-  return {
-    type: CLOSE_SIGNUP
-  };
-}
-
-export function openLogin() {
-  return {
-    type: OPEN_LOGIN
-  };
-}
-
-export function closeLogin() {
-  return {
-    type: CLOSE_LOGIN
+    type: SET_DATA_TREE,
+    tree
   };
 }

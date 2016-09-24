@@ -6,7 +6,101 @@
   "children": [
     {
       "data": {
+        "title": "Кибернетика",
+        "description": ""
+      },
+      "children": [
+        {
+          "data": {
+            "title": "Бионика",
+            "description": ""
+          },
+          "children": []
+        },
+        {
+          "data": {
+            "title": "Гомеостатика",
+            "description": ""
+          },
+          "children": []
+        },
+        {
+          "data": {
+            "title": "Распознавание образов",
+            "description": ""
+          },
+          "children": []
+        },
+        {
+          "data": {
+            "title": "Автоматическое управление",
+            "description": ""
+          },
+          "children": []
+        },
+        {
+          "data": {
+            "title": "Математическая лингвистика",
+            "description": ""
+          },
+          "children": []
+        }
+      ]
+    },
+    {
+      "data": {
         "title": "Теоретическая информатика",
+        "description": ""
+      },
+      "children": [
+        {
+          "data": {
+            "title": "Системный анализ",
+            "description": ""
+          },
+          "children": []
+        }
+      ]
+    },
+    {
+      "data": {
+        "title": "Искусственный интеллект",
+        "description": ""
+      },
+      "children": []
+    },
+    {
+      "data": {
+        "title": "Программирование",
+        "description": ""
+      },
+      "children": []
+    },
+    {
+      "data": {
+        "title": "Прикладная информатика",
+        "description": ""
+      },
+      "children": [
+        {
+          "data": {
+            "title": "АСНИ",
+            "description": ""
+          },
+          "children": []
+        },
+        {
+          "data": {
+            "title": "САПР",
+            "description": ""
+          },
+          "children": []
+        }
+      ]
+    },
+    {
+      "data": {
+        "title": "Вычислительная техника",
         "description": ""
       },
       "children": []

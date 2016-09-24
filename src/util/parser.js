@@ -2,7 +2,7 @@ import translit from 'translitit-cyrillic-russian-to-latin';
 import uniqueId from 'lodash/uniqueId';
 import slug from 'slug';
 
-import Node from '../immutable/Node';
+import RawNode from '../immutable/RawNode';
 
 export const transformData = (data) => ({
   ...data,
@@ -23,5 +23,5 @@ export function prepareTree(input: Object) {
 }
 
 export function convertTreeToNode(tree) {
-  return Node.fromJS(tree);
+  return RawNode.fromJS(tree);
 }

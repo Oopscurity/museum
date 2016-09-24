@@ -1,7 +1,7 @@
-import Node from '../immutable/Node';
+import RawNode from '../immutable/RawNode';
 import { SET_DATA_TREE } from '../actions';
 
-export const initialState = new Node();
+export const initialState = new RawNode();
 
 export default function reducer(state = initialState, action) {
   let nextState = state;

@@ -1,6 +1,7 @@
 export const SET_DATA_TREE = 'SET_DATA_TREE';
 export const SET_NODES = 'SET_NODES';
 export const SET_BRANCHES = 'SET_BRANCHES';
+export const OPEN_REFERENCE = 'OPEN_REFERENCE';
 
 export function setDataTree(tree) {
   return {
@@ -20,5 +21,12 @@ export function setBranches(branches) {
   return {
     type: SET_BRANCHES,
     branches
+  };
+}
+
+export function openReference(nodeId) {
+  return {
+    type: OPEN_REFERENCE,
+    nodeId
   };
 }

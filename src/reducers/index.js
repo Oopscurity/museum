@@ -1,10 +1,10 @@
 import { Map } from 'immutable';
 import { combineReducers } from 'redux-immutablejs';
 
-import nodes from './nodes';
+import visualization from './visualization';
 import tree from './tree';
 
 export default combineReducers(Map({
-  nodes,
+  visualization,
   tree
 }));

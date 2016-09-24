@@ -4,15 +4,20 @@ import Router from 'react-router/lib/Router';
 import browserHistory from 'react-router/lib/browserHistory';
 import Provider from 'react-redux/lib/components/Provider';
 
-import configureStore from './store';
-import { setDataTree } from './actions';
+import configureStore from './store/index';
+import { setDataTree, setNodes, setBranches } from './actions/index';
 import { getRoutes } from './routing';
+import { processTree } from './util/visualizer';
 import { prepareTree, convertTreeToNode } from './util/parser';
 import jsonData from '../dist/cs-structure.json';
 
 const store = configureStore();
-const dataTreeRoot = convertTreeToNode(prepareTree(jsonData));
-store.dispatch(setDataTree(dataTreeRoot));
+const dataTreeRoot = prepareTree(jsonData);
+const normalizedData = processTree({ root: dataTreeRoot });
+
+store.dispatch(setDataTree(convertTreeToNode(dataTreeRoot)));
+store.dispatch(setNodes(normalizedData.get('nodes')));
+store.dispatch(setBranches(normalizedData.get('branches')));
 
 ReactDOM.render(
   <Provider store={store}>

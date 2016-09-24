@@ -70,7 +70,7 @@ module.exports = {
     "react/jsx-equals-spacing": ERROR,
     "react/jsx-first-prop-new-line": [ERROR, "multiline"],
     "react/jsx-indent": [ERROR, 2],
-    "react/jsx-indent-props": ERROR,
+    "react/jsx-indent-props": [ERROR, 2],
     "react/jsx-key": WARNING,
     "react/jsx-no-bind": [ERROR, { "ignoreRefs": true }],
     "react/jsx-no-duplicate-props": WARNING,

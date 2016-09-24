@@ -6,7 +6,7 @@ import RawNode from '../immutable/RawNode';
 
 export const transformData = (data) => ({
   ...data,
-  id: uniqueId(),
+  id: uniqueId() - 1,
   url: slug(translit(data.title), { lower: true })
 });
 

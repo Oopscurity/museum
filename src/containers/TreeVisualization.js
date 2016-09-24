@@ -7,6 +7,7 @@ import { createSelector } from '../selectors';
 
 // probably should be moved to the shapes
 import { setCurrentNode } from '../actions';
+import Node from './Node';
 
 /*
   Actions with tree:
@@ -24,23 +25,9 @@ import { setCurrentNode } from '../actions';
 
 class TreeVisualization extends React.Component {
   // TODO: flow type check
-  // TODO: provide shouldComponentUpdate()
-  // based on the number of shapes to be rendered
-
-  renderNodes = () => (
-    // TODO: render independent components instead of Konva's shapes
-    this.props.nodes.map((item) => (
-      <Circle
-        fill="white"
-        key={item.getIn(['data', 'url'])}
-        radius={item.getIn(['params', 'R'])}
-        stroke="black"
-        stroke-width={2}
-        x={item.getIn(['params', 'x'])}
-        y={item.getIn(['params', 'y'])}
-      />
-    ))
-  );
+  shouldComponentUpdate(nextProps) {
+    return nextProps.nodes.size !== this.props.nodes.size;
+  }
 
   renderBranches = () => (
     this.props.branches.map((item, i) => (
@@ -62,7 +49,9 @@ class TreeVisualization extends React.Component {
         <Layer scaleX={0.5} scaleY={0.5}>
           <Group>
             {this.renderBranches()}
-            {this.renderNodes()}
+            {this.props.nodes.map((id) => (
+              <Node id={id} key={id} />
+            ))}
           </Group>
         </Layer>
       </Stage>
@@ -74,7 +63,7 @@ const inputSelector = createSelector(
   state => state.get('visualization'),
   visualization => ({
     branches: visualization.get('branches'),
-    nodes: visualization.get('nodes')
+    nodes: visualization.get('nodes').map(item => item.getIn(['data', 'id']))
   })
 );
 

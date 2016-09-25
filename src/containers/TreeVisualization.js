@@ -55,7 +55,7 @@ class TreeVisualization extends React.Component {
     const height = window.innerHeight;
 
     return (
-      <div onWheel={this.handleScroll}>
+      <div className="visualization" onWheel={this.handleScroll}>
         <Stage draggable width={width} height={height}>
           <Layer ref={c => this.layer = c}>
             <Group ref={c => this.gr = c} x={width / 2} y={height / 2}>

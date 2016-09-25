@@ -1,9 +1,10 @@
 import React from 'react';
+import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { Circle } from 'react-konva';
 
 import { createSelector } from '../selectors';
-import { openReference } from '../actions';
+import { openReference, openModal } from '../actions';
 
 class Node extends React.Component {
   shouldComponentUpdate(nextProps) {
@@ -11,7 +12,8 @@ class Node extends React.Component {
   }
 
   handleClick = () => {
-    this.props.openReference(this.props.id)
+    this.props.openModal();
+    this.props.openReference(this.props.id);
   };
 
   render() {
@@ -44,7 +46,7 @@ const makeInputSelector = () => (
 );
 
 const outputSelector = (dispatch) => ({
-  openReference: (nodeId) => dispatch(openReference(nodeId))
+  ...bindActionCreators({ openReference, openModal }, dispatch)
 });
 
 export default connect(makeInputSelector, outputSelector)(Node);

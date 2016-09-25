@@ -7,8 +7,16 @@ export default class Modal extends React.Component {
     visible: false
   };
 
+  componentDidMount() {
+    window.addEventListener('keydown', this.handleKeyDown);
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('keydown', this.handleKeyDown);
+  }
+
   handleKeyDown = (e) => {
-    if (e.keyCode === 27) {
+    if (this.props.visible && (e.keyCode === 27)) {
       this.props.onHide(e);
     }
   };
@@ -23,7 +31,7 @@ export default class Modal extends React.Component {
     });
     
     return (
-      <div className={className} onClick={this.props.onHide} onKeyDown={this.handleKeyDown}>
+      <div className={className} onClick={this.props.onHide}>
         <div className="modal__box" onClick={this.handleBoxClick}>
           {this.props.children}
         </div>

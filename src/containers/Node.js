@@ -12,8 +12,11 @@ class Node extends React.Component {
   }
 
   handleClick = () => {
+    const start = performance.now();
     this.props.openModal();
     this.props.openReference(this.props.id);
+    const end = performance.now();
+    console.log('open modal', end - start);
   };
 
   render() {

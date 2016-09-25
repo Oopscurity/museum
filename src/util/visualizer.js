@@ -105,7 +105,7 @@ export function iterateProcessTree(acc, node, params) {
 
       // second method - soft, distributes the space between children evenly
       // especially useful with 360 degree (circular) range
-      const angle = (i + 1) * params.range / childrenNumber;
+      const angle = (i + 1) * params.range / childrenNumber - params.range / 2;
       const [x, y] = getVectorCoords(angle, branchLength);
       let [x1, y1] = rotate(x, y, params.origin);
       x1 += params.x;

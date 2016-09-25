@@ -16,7 +16,6 @@ class Reference extends React.Component {
     if (!this.props.title) {
       return false;
     }
-
     return (
       <ModalContainer>
         <div>
@@ -30,8 +29,8 @@ class Reference extends React.Component {
 
 const referenceSelector = createSelector(
   state => state.getIn(['visualization', 'nodes']),
-  state => state.getIn(['visualization', 'referenceId']),
-  (nodes, referenceId) => (nodes.getIn([referenceId, 'data'], ImmutableMap({})))
+  state => state.getIn(['reference', 'id']),
+  (nodes, referenceId) => nodes.getIn([referenceId, 'data'], ImmutableMap({}))
 );
 
 const inputSelector = createSelector(

@@ -3,8 +3,7 @@ import { SET_BRANCHES, SET_NODES, OPEN_REFERENCE } from '../actions';
 
 export const initialState = Map({
   branches: List(),
-  nodes: List(),
-  referenceId: ''
+  nodes: List()
 });
 
 export default function reducer(state = initialState, action) {
@@ -16,10 +15,6 @@ export default function reducer(state = initialState, action) {
     }
     case SET_BRANCHES: {
       nextState = nextState.set('branches', action.branches);
-      break;
-    }
-    case OPEN_REFERENCE: {
-      nextState = nextState.set('referenceId', action.nodeId);
       break;
     }
   }

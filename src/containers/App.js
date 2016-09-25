@@ -9,7 +9,7 @@ export default class App extends React.Component {
     const { children } = this.props;
 
     return (
-      <div>
+      <div className="page">
         {children}
       </div>
     );

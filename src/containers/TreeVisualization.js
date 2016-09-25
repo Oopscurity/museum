@@ -29,6 +29,14 @@ class TreeVisualization extends React.Component {
     return nextProps.nodes.size !== this.props.nodes.size;
   }
 
+  handleScroll = (e) => {
+    const delta = e.deltaY;
+    const scale = (delta > 0) ? 1.1 : (1 / 1.1);
+    this.gr.scaleX(this.gr.scaleX() * scale);
+    this.gr.scaleY(this.gr.scaleY() * scale);
+    this.layer.draw();
+  };
+
   renderBranches = () => (
     this.props.branches.map((item, i) => (
       <Line
@@ -42,19 +50,23 @@ class TreeVisualization extends React.Component {
 
   render() {
     // TODO: runtime screen adaptation
-    // TODO: scaling
     // TODO: moving the scene with keyboard (arrows and WASD)
+    const width = window.innerWidth;
+    const height = window.innerHeight;
+
     return (
-      <Stage draggable width={window.innerWidth} height={window.innerHeight}>
-        <Layer scaleX={0.5} scaleY={0.5}>
-          <Group>
-            {this.renderBranches()}
-            {this.props.nodes.map((id) => (
-              <Node id={id} key={id} />
-            ))}
-          </Group>
-        </Layer>
-      </Stage>
+      <div onWheel={this.handleScroll}>
+        <Stage draggable width={width} height={height}>
+          <Layer ref={c => this.layer = c}>
+            <Group ref={c => this.gr = c} x={width / 2} y={height / 2}>
+              {this.renderBranches()}
+              {this.props.nodes.map((id) => (
+                <Node id={id} key={id} />
+              ))}
+            </Group>
+          </Layer>
+        </Stage>
+      </div>
     );
   }
 }

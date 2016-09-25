@@ -131,7 +131,7 @@ export function iterateProcessTree(acc, node, params) {
 
 // TODO: argument validation with Flow
 export function processTree(tree) {
-  const initialParams = { x: 800, y: 500, R: 30, L: 300, origin: 0, range: 360 };
+  const initialParams = { x: 0, y: 0, R: 30, L: 300, origin: 0, range: 360 };
   return iterateProcessTree(blankVisualization, tree.root, initialParams);
 }
 

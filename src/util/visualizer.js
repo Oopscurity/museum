@@ -97,8 +97,11 @@ export function iterateProcessTree(acc, node, params) {
       // rotation should satisfy (-range/2 <= angle <= range/2)
       // e.g. for the range of 90 degree it's -45 <= angle <= 45
       let angle;
-      if ((childrenNumber == 2) && (params.range <= 180)) {
+      if ((childrenNumber % 2 == 0) && (params.range <= 180)) {
         // first method - strict in terms of the range - includes limits
+        const rangePerChild = params.range / (childrenNumber - 1);
+        angle = i * rangePerChild - params.range / 2;
+      } else if ((childrenNumber % 2 == 1) && (params.range <= 320)) {
         const rangePerChild = params.range / (childrenNumber - 1);
         angle = i * rangePerChild - params.range / 2;
       } else {

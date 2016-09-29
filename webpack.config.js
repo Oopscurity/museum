@@ -1,71 +1,87 @@
 const path = require('path');
 const webpack = require('webpack');
-const merge = require('webpack-merge');
+const merge = require('merge');
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
-const TARGET = process.env.npm_lifecycle_event;
-process.env.BABEL_ENV = TARGET;
-
-const PATHS = {
-  app: './src/index.jsx',
-  style: './src/style/common.less',
-  build: path.resolve(__dirname, 'dist')
-};
-
-const common = {
-  entry: [
-    'webpack/hot/only-dev-server',
-    PATHS.app,
-    PATHS.style
-  ],
-  resolve: {
-    extensions: ['', '.js', '.jsx', '.less']
-  },
+let webpackConfig = {
   output: {
-    path: PATHS.build,
-    filename: 'app.js'
+    path: path.join(__dirname, 'dist'),
+    filename: 'bundle.js',
+    publicPath: '/static/'
   },
-  module: {
-    loaders: [
-      {
-        test: /\.jsx?$/,
-        loaders: ['babel?cacheDirectory'],
-        exclude: /node_modules/
-      },
-      {
-        test: /\.json$/,
-        loader: 'json-loader'
-      },
-      {
-        test: /\.less$/,
-        loader: 'style!css!autoprefixer!less',
-        exclude: /node_modules/
-      }
-    ]
+  resolve: {
+    extensions: ['', '.js', '.jsx', '.css']
   },
+  plugins: [
+    new webpack.optimize.OccurenceOrderPlugin(),
+    new webpack.NoErrorsPlugin()
+  ]
 };
 
-if (TARGET === 'start' || !TARGET) {
-  module.exports = merge(common, {
-    debug: true,
-    cache: true,
-    devtool: 'source-map',
-    devServer: {
-      contentBase: PATHS.build,
-      historyApiFallback: true,
-      hot: true,
-      inline: true,
-      progress: true,
-      stats: 'errors-only',
-      host: process.env.HOST,
-      port: process.env.PORT || 8000
+if (process.env.NODE_ENV === 'production') {
+  webpackConfig = merge(webpackConfig,{
+    devtool: "source-map",
+    entry: [
+      './src/index.jsx'
+    ],
+    module: {
+      loaders: [
+        {
+          test: /\.jsx?$/,
+          loader: 'babel',
+          exclude: /node_modules/,
+          include: __dirname
+        },
+        { test: /\.(png|jpg|gif|jpeg)$/, loader: 'url-loader?limit=8192' },
+        { test: /\.css$/, loader: ExtractTextPlugin.extract('style-loader', 'css-loader?sourceMap') }
+      ]
     },
     plugins: [
-      new webpack.HotModuleReplacementPlugin(),
-      new webpack.NoErrorsPlugin()
+      new webpack.DefinePlugin({
+        'process.env': {
+          NODE_ENV: JSON.stringify('production')
+        }
+      }),
+      new ExtractTextPlugin("app.css"),
+      new webpack.optimize.UglifyJsPlugin({ minimize: true })
+    ]
+  });
+} else {
+  webpackConfig = merge(webpackConfig,{
+    devtool: 'inline-source-map',
+    module: {
+      loaders: [
+        {
+          test: /\.jsx?$/,
+          loader: 'babel',
+          exclude: /node_modules/,
+          query: {
+            presets: ['es2015', 'react', 'survivejs-kanban'],
+            extra: {
+              'react-transform': {
+                transforms: [
+                  {
+                    transform: 'react-transform-hmr',
+                    imports: ['react'],
+                    locals: ['module']
+                  }
+                ]
+              }
+            }
+          }
+        },
+        { test: /\.(png|jpg|gif|jpeg)$/, loader: 'url-loader?limit=8192' },
+        { test: /\.css$/, loader: 'style-loader!css-loader' }
+      ]
+    },
+    entry: [
+      'webpack-hot-middleware/client',
+      './src/client/index.js'
+    ],
+    plugins: [
+      new webpack.HotModuleReplacementPlugin()
     ]
   });
 }
 
-if (TARGET === 'build') {
-  module.exports = merge(common, {});
-}
+module.exports = webpackConfig;

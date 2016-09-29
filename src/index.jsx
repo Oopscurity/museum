@@ -1,3 +1,5 @@
+import 'babel-polyfill';
+
 import React from 'react';
 import ReactDOM from 'react-dom';
 import Router from 'react-router/lib/Router';
@@ -12,7 +14,8 @@ import { prepareTree, convertTreeToNode } from './util/parser';
 import jsonData from '../dist/cs-structure.json';
 
 const start = performance.now();
-const store = configureStore();
+const initialState = window.__INITIAL_STATE__;
+const store = configureStore(initialState);
 const dataTreeRoot = prepareTree(jsonData);
 const normalizedData = processTree({ root: dataTreeRoot });
 

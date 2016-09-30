@@ -4,13 +4,14 @@ const merge = require('merge');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 let webpackConfig = {
+  context: __dirname,
   output: {
     path: path.join(__dirname, 'dist'),
     filename: 'bundle.js',
     publicPath: '/static/'
   },
   resolve: {
-    extensions: ['', '.js', '.jsx', '.css']
+    extensions: ['', '.js', '.jsx', '.less', '.css']
   },
   plugins: [
     new webpack.optimize.OccurenceOrderPlugin(),
@@ -22,15 +23,19 @@ if (process.env.NODE_ENV === 'production') {
   webpackConfig = merge(webpackConfig,{
     devtool: "source-map",
     entry: [
-      './src/index.jsx'
+      './src/index.jsx',
+      './src/less/common.less'
     ],
     module: {
       loaders: [
         {
           test: /\.jsx?$/,
           loader: 'babel',
-          exclude: /node_modules/,
-          include: __dirname
+          exclude: /node_modules/
+        },
+        {
+          test: /\.json$/,
+          loader: 'json-loader'
         },
         { test: /\.(png|jpg|gif|jpeg)$/, loader: 'url-loader?limit=8192' },
         { test: /\.css$/, loader: ExtractTextPlugin.extract('style-loader', 'css-loader?sourceMap') }
@@ -48,7 +53,7 @@ if (process.env.NODE_ENV === 'production') {
   });
 } else {
   webpackConfig = merge(webpackConfig,{
-    devtool: 'inline-source-map',
+    devtool: 'eval',
     module: {
       loaders: [
         {
@@ -56,19 +61,22 @@ if (process.env.NODE_ENV === 'production') {
           loader: 'babel',
           exclude: /node_modules/,
           query: {
-            presets: ['es2015', 'react', 'survivejs-kanban'],
-            extra: {
-              'react-transform': {
-                transforms: [
-                  {
-                    transform: 'react-transform-hmr',
-                    imports: ['react'],
-                    locals: ['module']
-                  }
-                ]
+            cacheDirectory: true,
+            presets: [
+              ['es2015', { "modules": false }],
+              'react',
+              'stage-1'
+            ],
+            env: {
+              development: {
+                presets: ['react-hmre']
               }
             }
           }
+        },
+        {
+          test: /\.json$/,
+          loader: 'json-loader'
         },
         { test: /\.(png|jpg|gif|jpeg)$/, loader: 'url-loader?limit=8192' },
         { test: /\.css$/, loader: 'style-loader!css-loader' }
@@ -76,10 +84,12 @@ if (process.env.NODE_ENV === 'production') {
     },
     entry: [
       'webpack-hot-middleware/client',
-      './src/client/index.js'
+      './src/index.jsx'
     ],
     plugins: [
-      new webpack.HotModuleReplacementPlugin()
+      new webpack.optimize.OccurenceOrderPlugin(),
+      new webpack.HotModuleReplacementPlugin(),
+      new webpack.NoErrorsPlugin()
     ]
   });
 }

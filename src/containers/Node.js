@@ -20,6 +20,7 @@ class Node extends React.Component {
   };
 
   render() {
+    console.log(this.props);
     const params = this.props.params;
     return (
       <Circle

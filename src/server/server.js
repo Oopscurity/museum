@@ -2,17 +2,18 @@ import path from 'path';
 import express from 'express';
 
 import webpack from 'webpack';
-import webpackConfig from '../webpack.config.js';
+import webpackConfig from '../../webpack.config.js';
 import webpackDevMiddleware from 'webpack-dev-middleware';
 import webpackHotMiddleware from 'webpack-hot-middleware';
 
-import React, { ReactDOMServer } from 'react';
-import { createLocation } from 'history';
+import React from 'react';
+import ReactDOMServer from 'react-dom/server';
+import { createLocation } from 'history/LocationUtils';
 import { RouterContext, match } from 'react-router';
 import { Provider } from 'react-redux';
 
-import configureStore from './store';
-import { getRoutes } from './routing';
+import configureStore from '../store';
+import { getRoutes } from '../routing';
 
 const app = express();
 const renderTemplate = (html, initialState) => {
@@ -25,25 +26,27 @@ const renderTemplate = (html, initialState) => {
         <link rel="stylesheet" type="text/css" href="/static/app.css">
       </head>
       <body>
-        <div id="root">${html}</div>
+        <div id="app">${html}</div>
         <script>
           window.__INITIAL_STATE__ = ${JSON.stringify(initialState)}; 
         </script>
-        <script src="/bundle.js"></script>
+        <script src="/static/bundle.js"></script>
       </body>
     </html>
   `;
 };
 
-if (process.env.NODE_ENV !== 'production') {
+if (process.env.NODE_ENV === 'development') {
   const compiler = webpack(webpackConfig);
   app.use(webpackDevMiddleware(compiler, {
-    noInfo: true,
-    publicPath: webpackConfig.output.publicPath
+    publicPath: webpackConfig.output.publicPath,
+    stats: {
+      color: true
+    }
   }));
-  app.use(webpackHotMiddleware(compiler));
+  app.use(webpackHotMiddleware(compiler, { log: console.log }));
 } else {
-  app.use('/static', express.static(path(__dirname, '../dist')));
+  app.use('/static', express.static(path.join(__dirname, '../../static')));
 }
 
 app.get('/*', (req, res) => {
@@ -67,6 +70,7 @@ app.get('/*', (req, res) => {
       </Provider>
     );
     const state = store.getState();
+    
     res.status(200).end(renderTemplate(html, state));
   });
 });

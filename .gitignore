@@ -6,4 +6,5 @@
 /npm-debug.log
 
 /build
-dist/bundle.js
+/public
+assets.json

@@ -1,6 +1,9 @@
 const fs = require('fs');
 const webpack = require('webpack');
 const path = require('path');
+const config = require('./webpack.base.js');
+
+const { SERVER_ENTRY, SERVER_OUTPUT, PUBLIC_PATH } = config;
 
 function getExternals() {
   const nodeModules = fs.readdirSync(path.join(process.cwd(), 'node_modules'))
@@ -12,10 +15,9 @@ function getExternals() {
 
 module.exports = {
   target: 'node',
-  context: path.resolve(__dirname, '..'),
 
   entry: [
-    './src/server/index.js'
+    SERVER_ENTRY
   ],
 
   externals: getExternals(),
@@ -25,8 +27,8 @@ module.exports = {
   },
 
   output: {
-    path: 'build',
-    filename: './server/index.js'
+    path: SERVER_OUTPUT,
+    filename: 'server.js'
   },
 
   resolve: {

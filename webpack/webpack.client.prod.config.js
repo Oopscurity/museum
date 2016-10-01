@@ -1,20 +1,26 @@
 const path = require('path');
 const webpack = require('webpack');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const AssetsPlugin = require('assets-webpack-plugin');
+const config = require('./webpack.base.js');
+
+const { CLIENT_JS_ENTRY, CLIENT_STYLE_ENTRY, CLIENT_OUTPUT, PUBLIC_PATH } = config;
+const extractLess = new ExtractTextPlugin('common.css');
+
 
 module.exports = {
   context: path.resolve(__dirname, '..'),
 
   entry: [
-    'babel-polyfill',
-    './src/index.jsx'
-    //'../src/style/common.less'
+    // 'babel-polyfill',
+    CLIENT_JS_ENTRY,
+    CLIENT_STYLE_ENTRY
   ],
 
   output: {
-    path: 'dist',
+    path: CLIENT_OUTPUT,
     filename: 'bundle.js',
-    publicPath: '/static/'
+    publicPath: PUBLIC_PATH
   },
 
   resolve: {
@@ -35,19 +41,19 @@ module.exports = {
       {
         test: /\.json$/,
         loader: 'json-loader'
-      }
+      },
       // {
       //   test: /\.css$/,
       //   include: /src\/style/,
       //   exclude: /node_modules/,
       //   loader: 'style!css'
       // },
-      // {
-      //   test: /\.less$/,
-      //   include: /src\/style/,
-      //   exclude: /node_modules/,
-      //   loader: 'less'
-      // }
+      {
+        test: /\.less$/,
+        include: /src\/style/,
+        exclude: /node_modules/,
+        loader: extractLess.extract(['css', 'less'])
+      }
     ]
   },
 
@@ -57,10 +63,8 @@ module.exports = {
         NODE_ENV: JSON.stringify("production")
       }
     }),
-    // new ExtractTextPlugin({
-    //   filename: 'styles.css',
-    //   allChunks: true
-    // }),
+    extractLess,
+    new AssetsPlugin({ filename: 'assets.json' }),
     new webpack.optimize.OccurrenceOrderPlugin(),
     new webpack.optimize.AggressiveMergingPlugin(),
     new webpack.optimize.DedupePlugin(),

@@ -25,6 +25,14 @@ import Node from './Node';
 
 class TreeVisualization extends React.Component {
   // TODO: flow type check
+  componentDidMount() {
+    this.stage.getStage().width(window.innerWidth);
+    this.stage.getStage().height(window.innerHeight);
+
+    this.gr.x(window.innerWidth / 2);
+    this.gr.y(window.innerHeight / 2);
+  }
+
   shouldComponentUpdate(nextProps) {
     return nextProps.nodes.size !== this.props.nodes.size;
   }
@@ -51,14 +59,11 @@ class TreeVisualization extends React.Component {
   render() {
     // TODO: runtime screen adaptation
     // TODO: moving the scene with keyboard (arrows and WASD)
-    const width = window.innerWidth;
-    const height = window.innerHeight;
-
     return (
       <div className="visualization" onWheel={this.handleScroll}>
-        <Stage draggable width={width} height={height}>
+        <Stage draggable ref={c => this.stage = c}>
           <Layer ref={c => this.layer = c}>
-            <Group ref={c => this.gr = c} x={width / 2} y={height / 2}>
+            <Group ref={c => this.gr = c}>
               {this.renderBranches()}
               {this.props.nodes.map((id) => (
                 <Node id={id} key={id} />

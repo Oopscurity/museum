@@ -2,12 +2,12 @@
   "presets": [
     "es2015",
     "react",
-    "survivejs-kanban"
+    "stage-0"
   ],
   "env": {
-    "start": {
+    "production": {
       "presets": [
-        "react-hmre"
+        "react-optimize"
       ]
     }
   }

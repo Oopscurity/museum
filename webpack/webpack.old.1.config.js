@@ -41,7 +41,7 @@ const common = {
         exclude: /node_modules/
       }
     ]
-  },
+  }
 };
 
 if (TARGET === 'start' || !TARGET) {

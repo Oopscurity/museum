@@ -1,13 +1,12 @@
-import thunk from 'redux-thunk';
-import { createStore, applyMiddleware, compose } from 'redux';
+import { fromJS } from 'immutable';
+import { createStore, compose } from 'redux';
 
 import reducer from '../reducers';
 
 const browserHasDevTools = (typeof window === 'object') && (typeof window.devToolsExtension !== 'undefined');
 
 export default function configureStore(state) {
-  const store = createStore(reducer, state, compose(
-    applyMiddleware(thunk),
+  const store = createStore(reducer, fromJS(state), compose(
     browserHasDevTools ? window.devToolsExtension() : f => f
   ));
 

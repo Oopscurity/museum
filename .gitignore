@@ -1,5 +1,10 @@
 .idea
+
 /coverage
+
 /node_modules
-dist/bundle.js
-npm-debug.log
+/npm-debug.log
+
+/build
+/public
+assets.json

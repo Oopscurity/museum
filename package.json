@@ -19,7 +19,7 @@
     "coveralls": "cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js && rm -rf ./coverage",
     "travis": "npm run lint && npm run coverage && npm run coveralls",
     "clean": "rm -rf build public && rm -f assets.json",
-    "heroku-prebuild": "sudo apt-get install libcairo2-dev libjpeg8-dev libpango1.0-dev libgif-dev build-essential g++",
+    "heroku-prebuild": "apt-get install libcairo2-dev libjpeg8-dev libpango1.0-dev libgif-dev build-essential g++",
     "postinstall": "npm run clean && npm run build"
   },
   "author": "Artem Kravchenko",

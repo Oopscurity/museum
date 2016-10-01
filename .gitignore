@@ -1,5 +1,9 @@
 .idea
+
 /coverage
+
 /node_modules
+/npm-debug.log
+
+/build
 dist/bundle.js
-npm-debug.log

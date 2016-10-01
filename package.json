@@ -18,7 +18,8 @@
     "coverage": "babel-node ./node_modules/istanbul/lib/cli cover --include-all-sources _mocha -- -R spec",
     "coveralls": "cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js && rm -rf ./coverage",
     "travis": "npm run lint && npm run coverage && npm run coveralls",
-    "clean": "rm -rf build public && rm -f assets.json"
+    "clean": "rm -rf build public && rm -f assets.json",
+    "postinstall": "npm run clean && npm run build"
   },
   "author": "Artem Kravchenko",
   "private": true,

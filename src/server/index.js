@@ -21,8 +21,9 @@ if (config.NODE_ENV === 'development') {
   const compiler = webpack(webpackConfig);
   app.use(webpackDevMiddleware(compiler, {
     publicPath: webpackConfig.output.publicPath,
-    stats: {
-      color: true
+    watchOptions: {
+      aggregateTimeout: 100,
+      poll: 100
     }
   }));
   app.use(webpackHotMiddleware(compiler, { log: console.log }));
@@ -30,7 +31,11 @@ if (config.NODE_ENV === 'development') {
   app.use(express.static('public'));
 }
 
-const assets = require('../../assets.json');
+let assets = null;
+if (config.NODE_ENV === 'production') {
+  assets = require('../../assets.json');
+}
+
 const renderTemplate = (html, initialState) => {
   return `
     <!doctype html>
@@ -38,14 +43,21 @@ const renderTemplate = (html, initialState) => {
       <head>
         <meta charset="utf-8">
         <title>Computer science museum</title>
-        <link rel="stylesheet" type="text/css" href="${assets.main.css}">
+        ${config.NODE_ENV === 'production' ?
+          `<link rel="stylesheet" type="text/css" href="${assets.main.css}">` :
+          ''
+        }
       </head>
       <body>
         <div id="app">${html}</div>
         <script>
           window.__INITIAL_STATE__ = ${JSON.stringify(initialState)}; 
         </script>
-        <script src="${assets.main.js}"></script>
+        <script src="${
+          config.NODE_ENV === 'production' ?
+            assets.main.js :
+            '/assets/bundle.js'
+        }"></script>
       </body>
     </html>
   `;

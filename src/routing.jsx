@@ -1,7 +1,7 @@
 import React from 'react';
 import Route from 'react-router/lib/Route';
 
-import App from './pages/app';
+import App from './pages/App';
 import MapPage from './pages/Map';
 
 export function getRoutes() {

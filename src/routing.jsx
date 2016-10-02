@@ -1,19 +1,13 @@
 import React from 'react';
 import Route from 'react-router/lib/Route';
-import IndexRoute from 'react-router/lib/IndexRoute';
 
 import App from './pages/app';
-import Home from './pages/home';
 import MapPage from './pages/Map';
 
 export function getRoutes() {
   return (
     <Route component={App}>
-      <Route component={Home} path="/" />
-      <Route path="/map">
-        <IndexRoute component={MapPage} />
-        <Route component={MapPage} path=":id" />
-      </Route>
+      <Route component={MapPage} name="map" path="/(map(/:id))" />
     </Route>
   );
 }

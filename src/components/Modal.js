@@ -25,14 +25,18 @@ export default class Modal extends React.Component {
     e.stopPropagation();
   };
 
+  handleTouchMove = (e) => {
+    e.stopPropagation();
+  };
+
   render() {
     const className = classNames('modal__container', {
       'hidden': !this.props.visible
     });
-    
+
     return (
-      <div className={className} onClick={this.props.onHide}>
-        <div className="modal__box" onClick={this.handleBoxClick}>
+      <div className={className} onClick={this.props.onHide} onTouchMove={this.props.onHide}>
+        <div className="modal__box" onClick={this.handleBoxClick} onTouchMove={this.handleTouchMove}>
           {this.props.children}
         </div>
       </div>

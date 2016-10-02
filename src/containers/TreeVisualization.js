@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { Stage, Layer, Circle, Line, Group } from 'react-konva';
+import { Stage, Layer, Line, Group } from 'react-konva';
 
 import { createSelector } from '../selectors';
 
@@ -51,7 +51,7 @@ class TreeVisualization extends React.Component {
         key={i}
         points={item.get('points')}
         stroke="black"
-        strokeWidth={2}
+        strokeWidth={1}
       />
     ))
   );

@@ -1,5 +1,5 @@
-import path from 'path';
 import express from 'express';
+import compression from 'compression';
 
 import webpack from 'webpack';
 import webpackConfig from '../../webpack/webpack.client.dev.config.js';
@@ -28,6 +28,7 @@ if (config.NODE_ENV === 'development') {
   }));
   app.use(webpackHotMiddleware(compiler, { log: console.log }));
 } else {
+  app.use(compression());
   app.use(express.static('public'));
 }
 

@@ -57,20 +57,34 @@ module.exports = {
   },
 
   plugins: [
-    new webpack.DefinePlugin({
-      "process.env": {
-        NODE_ENV: JSON.stringify("production")
-      }
-    }),
     extractLess,
     new AssetsPlugin({ filename: 'assets.json' }),
     new webpack.optimize.OccurrenceOrderPlugin(),
     new webpack.optimize.AggressiveMergingPlugin(),
     new webpack.optimize.DedupePlugin(),
     new webpack.optimize.UglifyJsPlugin({
-      compress: {
-        warnings: false
-      }
+      compressor: {
+        warnings: false,
+        dead_code: false,
+        screw_ie8: true,
+        drop_console: true,
+        drop_debugger: true,
+        unused: true,
+        if_return: true,
+        join_vars: true,
+        booleans: true,
+        sequences: true,
+        conditionals: true,
+        loops: true
+      },
+      mangle: true,
+      comments: false
+    }),
+    new webpack.DefinePlugin({
+      "process.env": {
+        NODE_ENV: JSON.stringify("production")
+      },
+      NODE_ENV: JSON.stringify("production")
     }),
     new webpack.NoErrorsPlugin()
   ]

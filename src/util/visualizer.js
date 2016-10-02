@@ -2,7 +2,7 @@
  * TODO: provide parameterized visualization at runtime
  */
 
-import { reduce } from 'lodash';
+import reduce from 'lodash/reduce';
 import { List, Map as ImmutableMap } from 'immutable';
 
 export const blankVisualization = ImmutableMap({

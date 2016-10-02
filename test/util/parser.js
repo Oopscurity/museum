@@ -6,14 +6,14 @@ import {
   transformChildren,
   convertTreeToNode
 } from '../../src/util/parser';
-import Node from '../../src/immutable/Node';
+import Node from '../../src/immutable/RawNode';
 
 describe('parser', () => {
   describe('transformData()', () => {
     it('adds correct id and url', () => {
       const data = { title: 'Информатика' };
       const nextData = transformData(data);
-      expect(nextData).to.deep.equal({ id: '1', title: 'Информатика', url: 'ynformatyka' });
+      expect(nextData).to.deep.equal({ id: 0, title: 'Информатика', url: 'ynformatyka' });
     });
   });
   describe('transformChildren()', () => {
@@ -22,7 +22,7 @@ describe('parser', () => {
       const nextChildren = transformChildren(children);
       expect(nextChildren).to.deep.equal([
         {
-          data: { id: '2', title: 123, url: '123' },
+          data: { id: 1, title: 123, url: '123' },
           children: []
         }
       ]);
@@ -32,11 +32,11 @@ describe('parser', () => {
       const nextChildren = transformChildren(children);
       expect(nextChildren).to.deep.equal([
         {
-          data: { id: '3', title: 'first', url: 'first' },
+          data: { id: 2, title: 'first', url: 'first' },
           children: []
         },
         {
-          data: { id: '4', title: 'second', url: 'second' },
+          data: { id: 3, title: 'second', url: 'second' },
           children: []
         }
       ]);

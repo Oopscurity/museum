@@ -2,7 +2,7 @@ import { expect } from 'chai';
 
 import { setDataTree } from '../../src/actions';
 import reducer, { initialState } from '../../src/reducers/tree';
-import Node from '../../src/immutable/Node';
+import Node from '../../src/immutable/RawNode';
 
 export default function treeReducerSpec() {
   describe('tree', () => {

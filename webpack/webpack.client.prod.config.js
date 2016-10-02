@@ -12,7 +12,6 @@ module.exports = {
   context: path.resolve(__dirname, '..'),
 
   entry: [
-    // 'babel-polyfill',
     CLIENT_JS_ENTRY,
     CLIENT_STYLE_ENTRY
   ],

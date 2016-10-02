@@ -3,10 +3,10 @@ const webpack = require('webpack');
 const path = require('path');
 const config = require('./webpack.base.js');
 
-const { SERVER_ENTRY, SERVER_OUTPUT, PUBLIC_PATH } = config;
+const { SERVER_ENTRY, SERVER_OUTPUT } = config;
 
 function getExternals() {
-  const nodeModules = fs.readdirSync(path.join(process.cwd(), 'node_modules'))
+  const nodeModules = fs.readdirSync(path.join(process.cwd(), 'node_modules'));
   return nodeModules.reduce(function (ext, mod) {
     ext[mod] = 'commonjs ' + mod;
     return ext;

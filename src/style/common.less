@@ -1,76 +1,9 @@
 @import 'https://fonts.googleapis.com/css?family=Open+Sans&subset=cyrillic';
+
+@import './blocks/global';
+@import './blocks/page';
+@import './blocks/modal';
+@import './blocks/reference';
 @import './blocks/hamburger';
 @import './blocks/sidebar';
-
-* {
-  box-sizing: border-box;
-}
-
-html, body, .page {
-  margin: 0;
-  padding: 0;
-}
-
-.page {
-  font-size: 12px;
-  font-family: 'Open Sans', sans-serif;
-}
-
-.visualization {
-  &:active {
-    cursor: move;
-  }
-}
-
-.modal {
-  &__container {
-    position: fixed;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    z-index: 1000;
-
-    display: flex;
-    overflow-y: auto;
-
-    background-color: rgba(0, 0, 0, 0.3);
-  }
-
-  &__box {
-    margin: auto;
-    padding: 15px;
-
-    min-width: 480px;
-    max-width: 720px;
-    background-color: white;
-  }
-}
-
-.hidden {
-  display: none;
-}
-
-.reference {
-  font-size: 14px;
-
-  h1 {
-    text-align: center;
-  }
-  
-  p {
-    img {
-      display: inline;
-      vertical-align: middle;
-    }
-  }
-
-  p:first-child {
-    img {
-      margin-right: 15px;
-      margin-bottom: 15px;
-      float: left;
-      max-width: 200px;
-    }
-  }
-}
+@import './blocks/visualization';

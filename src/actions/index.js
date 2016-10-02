@@ -5,6 +5,7 @@ export const SET_BRANCHES = 'SET_BRANCHES';
 export const OPEN_MODAL = 'OPEN_MODAL';
 export const CLOSE_MODAL = 'CLOSE_MODAL';
 export const OPEN_REFERENCE = 'OPEN_REFERENCE';
+export const TOGGLE_SIDEBAR = 'TOGGLE_SIDEBAR';
 
 export function setDataTree(tree) {
   return {
@@ -43,5 +44,11 @@ export function openReference(nodeId) {
   return {
     type: OPEN_REFERENCE,
     nodeId
+  };
+}
+
+export function toggleSidebar() {
+  return {
+    type: TOGGLE_SIDEBAR
   };
 }

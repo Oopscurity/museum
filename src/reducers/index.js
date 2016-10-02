@@ -12,3 +12,10 @@ export default combineReducers(Map({
   ui,
   reference
 }));
+
+export const initialState = Map({
+  visualization: require('./visualization').initialState,
+  tree: require('./tree').initialState,
+  ui: require('./ui').initialState,
+  reference: require('./reference').initialState
+});

@@ -1,9 +1,10 @@
 import { Map as ImmutableMap } from 'immutable';
 
-import { OPEN_MODAL, CLOSE_MODAL } from '../actions';
+import { OPEN_MODAL, CLOSE_MODAL, TOGGLE_SIDEBAR } from '../actions';
 
 export const initialState = ImmutableMap({
-  isModalVisible: false
+  isModalVisible: false,
+  isSidebarVisible: true
 });
 
 export default function reducer(state = initialState, action) {
@@ -15,6 +16,10 @@ export default function reducer(state = initialState, action) {
     }
     case CLOSE_MODAL: {
       nextState = state.set('isModalVisible', false);
+      break;
+    }
+    case TOGGLE_SIDEBAR: {
+      nextState = state.update('isSidebarVisible', isVisible => !isVisible);
       break;
     }
   }

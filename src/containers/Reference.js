@@ -8,6 +8,10 @@ import { createSelector } from '../selectors';
 import ModalContainer from './Modal';
 
 class Reference extends React.Component {
+  static defaultProps = {
+    description: ''
+  };
+
   shouldComponentUpdate(nextProps) {
     return nextProps !== this.props;
   }
@@ -16,11 +20,15 @@ class Reference extends React.Component {
     if (!this.props.title) {
       return false;
     }
+
     return (
       <ModalContainer>
         <div>
           <Helmet title={this.props.title} />
-          <Markdown source={this.props.description} />
+          <div className="reference">
+            <Markdown source={`# ${this.props.title}`} />
+            <Markdown source={this.props.description} />
+          </div>
         </div>
       </ModalContainer>
     );

@@ -8,7 +8,7 @@ import { expect } from 'chai';
 import Provider from 'react-redux/lib/components/Provider';
 
 import configureStore from '../../src/store';
-import App from '../../src/pages/app';
+import App from '../../src/pages/App';
 
 describe('App', () => {
   const store = configureStore();

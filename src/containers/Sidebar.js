@@ -30,7 +30,9 @@ class Sidebar extends React.Component {
             onClick={this.props.toggleSidebar}
           />
         </div>
-        <div className="sidebar__content"></div>
+        <div className="sidebar__content">
+          <p>В рамках проекта "История инфоратики в лицах"</p>
+        </div>
         <p className="sidebar__footer">Copyright © 2016 Артем Кравченко</p>
       </div>
     );

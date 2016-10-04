@@ -7,10 +7,11 @@ import browserHistory from 'react-router/lib/browserHistory';
 import Provider from 'react-redux/lib/components/Provider';
 
 import configureStore from './store/index';
-import { setDataTree, setNodes, setBranches } from './actions/index';
+import levelize from './util/levelize';
+import visualizeDeep from './util/visualize/deep';
+import { setDeepTree } from './actions/index';
 import { getRoutes } from './routing';
-import { processTree } from './util/visualizer';
-import { prepareTree, convertTreeToNode } from './util/parser';
+
 import jsonData from '../static/cs-structure.json';
 
 const start = performance.now();
@@ -18,12 +19,11 @@ const start = performance.now();
 const initialState = window.__INITIAL_STATE__;
 const store = configureStore(initialState);
 
-const dataTreeRoot = prepareTree(jsonData);
-const normalizedData = processTree({ root: dataTreeRoot });
+const levelizedTree = levelize(jsonData);
+const deep = visualizeDeep(levelizedTree);
 
-// store.dispatch(setDataTree(convertTreeToNode(dataTreeRoot)));
-store.dispatch(setNodes(normalizedData.get('nodes')));
-store.dispatch(setBranches(normalizedData.get('branches')));
+store.dispatch(setDeepTree(deep));
+console.log(deep.toJS());
 
 ReactDOM.render(
   <Provider store={store}>

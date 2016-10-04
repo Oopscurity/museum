@@ -8,7 +8,7 @@ import { openReference, openModal } from '../actions';
 
 const fontSize = 13;
 
-export class Node extends React.Component {
+export default class DeepNode extends React.Component {
   constructor(...props) {
     super(...props);
     this.state = {
@@ -29,12 +29,10 @@ export class Node extends React.Component {
   };
 
   handleMouseEnter = () => {
-    document.body.style.cursor = 'pointer';
-    this.setState({ fill: '#ADD8E6' });
+    this.setState({ fill: '#F0F8FF' });
   }
 
   handleMouseLeave = () => {
-    document.body.style.cursor = 'default';
     this.setState({ fill: 'white' });
   };
 
@@ -42,8 +40,8 @@ export class Node extends React.Component {
     const params = this.props.params;
     const data = this.props.data;
 
-    const width = data.get('title').length * fontSize;
-    const height = params.get('R') * 2;
+    const width = params.get('width');
+    const height = params.get('height');
 
     return (
       <Group
@@ -79,22 +77,3 @@ export class Node extends React.Component {
     );
   }
 }
-
-const getCurrentNode = (state, props) =>
-  state.getIn(['visualization', 'nodes']).get(props.id);
-
-const makeInputSelector = () => (
-  createSelector(
-    getCurrentNode,
-    node => ({
-      data: node.get('data'),
-      params: node.get('params')
-    })
-  )
-);
-
-const outputSelector = (dispatch) => ({
-  ...bindActionCreators({ openReference, openModal }, dispatch)
-});
-
-export default connect(makeInputSelector, outputSelector)(Node);

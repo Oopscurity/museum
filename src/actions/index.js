@@ -1,6 +1,7 @@
 export const SET_DATA_TREE = 'SET_DATA_TREE';
 export const SET_NODES = 'SET_NODES';
 export const SET_BRANCHES = 'SET_BRANCHES';
+export const SET_DEEP_TREE = 'SET_DEEP_TREE';
 
 export const OPEN_MODAL = 'OPEN_MODAL';
 export const CLOSE_MODAL = 'CLOSE_MODAL';
@@ -25,6 +26,13 @@ export function setBranches(branches) {
   return {
     type: SET_BRANCHES,
     branches
+  };
+}
+
+export function setDeepTree(deepTree) {
+  return {
+    type: SET_DEEP_TREE,
+    deepTree
   };
 }
 

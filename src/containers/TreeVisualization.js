@@ -29,6 +29,9 @@ class TreeVisualization extends React.Component {
     this.stage.getStage().width(window.innerWidth);
     this.stage.getStage().height(window.innerHeight);
 
+
+    this.gr.scaleX(0.5);
+    this.gr.scaleY(0.5);
     this.gr.x(window.innerWidth / 2);
     this.gr.y(window.innerHeight / 2);
   }
@@ -39,7 +42,7 @@ class TreeVisualization extends React.Component {
 
   handleScroll = (e) => {
     const delta = e.deltaY;
-    const scale = (delta > 0) ? 1.1 : (1 / 1.1);
+    const scale = (delta < 0) ? 1.1 : (1 / 1.1);
     this.gr.scaleX(this.gr.scaleX() * scale);
     this.gr.scaleY(this.gr.scaleY() * scale);
     this.layer.draw();
@@ -61,7 +64,7 @@ class TreeVisualization extends React.Component {
     // TODO: moving the scene with keyboard (arrows and WASD)
     return (
       <div className="visualization" onWheel={this.handleScroll}>
-        <Stage draggable ref={c => this.stage = c}>
+        <Stage draggable ref={c => this.stage = c} y={70}>
           <Layer ref={c => this.layer = c}>
             <Group ref={c => this.gr = c}>
               {this.renderBranches()}

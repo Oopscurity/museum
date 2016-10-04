@@ -59,7 +59,7 @@ export function iterateProcessTree(acc, node, params) {
 
   // common params
   const childRadius = params.R * 0.7;
-  const childBranchLength = params.L * 0.4;
+  const childBranchLength = params.L * 0.8;
   const childRange = params.range * 0.4;
 
   // used in computations

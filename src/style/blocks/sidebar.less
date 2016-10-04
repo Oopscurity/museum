@@ -21,6 +21,10 @@
   
   transition: transform 0.5s;
   
+  .hamburger {
+    margin-top: -20px;
+  }
+
   &__header {
     display: flex;
     align-items: center;
@@ -29,11 +33,25 @@
   &__content {
     margin-right: 50px;
     flex: 1;
+    
+    section {
+      font-size: 0.9em;
+    }
+
+    p {
+      margin-top: 15px;
+      margin-bottom: 15px;
+    }
+  }
+
+  &__main {
+    margin-top: 30px;
+    font-size: 16px;
   }
 
   &__footer {
     margin-right: 15px;
-    font-size: 14px;
+    font-size: 12px;
   }
 
   &--hidden {

@@ -29,7 +29,7 @@ class Node extends React.Component {
   };
 
   handleMouseEnter = () => {
-    this.setState({ fill: '#F0F8FF' });
+    this.setState({ fill: '#ADD8E6' });
   }
 
   handleMouseLeave = () => {

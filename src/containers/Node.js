@@ -29,10 +29,12 @@ class Node extends React.Component {
   };
 
   handleMouseEnter = () => {
+    document.body.style.cursor = 'pointer';
     this.setState({ fill: '#ADD8E6' });
   }
 
   handleMouseLeave = () => {
+    document.body.style.cursor = 'default';
     this.setState({ fill: 'white' });
   };
 

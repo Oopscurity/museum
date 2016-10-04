@@ -5,15 +5,9 @@
   left: 0;
   z-index: 10;
 
-  border-right: 1px solid lightgrey;
-
-  width: 400px;
-
   padding: 20px;
-
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  width: 400px;
+  border-right: 1px solid lightgrey;
 
   transform: translateX(0);
   background-color: rgba(255, 255, 255, 0.8);
@@ -21,17 +15,11 @@
   
   transition: transform 0.5s;
   
-  .hamburger {
-    margin-top: -20px;
-  }
-
-  &__header {
-    display: flex;
-    align-items: center;
+  .layout__column:last-child {
+    margin-left: 20px;
   }
 
   &__content {
-    margin-right: 50px;
     flex: 1;
     
     section {
@@ -50,11 +38,10 @@
   }
 
   &__footer {
-    margin-right: 15px;
     font-size: 12px;
   }
 
   &--hidden {
-    transform: translateX(-320px);
+    transform: translateX(-330px);
   }
 }

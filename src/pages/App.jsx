@@ -9,7 +9,7 @@ export default class App extends React.Component {
   render() {
     return (
       <div className="page">
-        <Helmet titleTemplate="%s - VMoCO"/>
+        <Helmet titleTemplate="%s - Виртуальный музей информатики"/>
         {this.props.children}
         <Sidebar />
       </div>

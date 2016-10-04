@@ -43,7 +43,7 @@ const renderTemplate = (html, initialState) => {
     <html>
       <head>
         <meta charset="utf-8">
-        <title>Computer science museum</title>
+        <title>Виртуальный музей информатики</title>
         ${config.NODE_ENV === 'production' ?
           `<link rel="stylesheet" type="text/css" href="${assets.main.css}">` :
           ''

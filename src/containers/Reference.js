@@ -1,5 +1,4 @@
 import React from 'react';
-import Helmet from 'react-helmet';
 import { connect } from 'react-redux';
 import Markdown from 'react-markdown';
 import { Map as ImmutableMap } from 'immutable';
@@ -12,19 +11,14 @@ class Reference extends React.Component {
     description: ''
   };
 
-  shouldComponentUpdate(nextProps) {
-    return nextProps !== this.props;
-  }
-
   render() {
     if (!this.props.title) {
       return false;
     }
 
     return (
-      <ModalContainer>
+      <ModalContainer title={this.props.title}>
         <div>
-          <Helmet title={this.props.title} />
           <div className="reference">
             <Markdown source={`# ${this.props.title}`} />
             <Markdown source={this.props.description} />

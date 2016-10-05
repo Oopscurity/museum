@@ -1,4 +1,5 @@
 import React from 'react';
+import Helmet from 'react-helmet';
 import classNames from 'classnames';
 
 export default class Modal extends React.Component {
@@ -36,6 +37,9 @@ export default class Modal extends React.Component {
 
     return (
       <div className={className} onClick={this.props.onHide} onTouchMove={this.props.onHide}>
+        {this.props.visible &&
+          <Helmet title={this.props.title} />
+        }
         <div className="modal__box" onClick={this.handleBoxClick} onTouchMove={this.handleTouchMove}>
           {this.props.children}
         </div>

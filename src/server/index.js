@@ -14,6 +14,7 @@ import { Provider } from 'react-redux';
 import config from './config';
 import configureStore from '../store';
 import { getRoutes } from '../routing';
+import favicon from '../../static/pic/favicon';
 
 const app = express();
 
@@ -44,6 +45,7 @@ const renderTemplate = (html, initialState) => {
       <head>
         <meta charset="utf-8">
         <title>Виртуальный музей информатики</title>
+        <link rel="icon" type="image/png" href="${favicon}" />
         ${config.NODE_ENV === 'production' ?
           `<link rel="stylesheet" type="text/css" href="${assets.main.css}">` :
           ''

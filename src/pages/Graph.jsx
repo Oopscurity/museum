@@ -1,5 +1,10 @@
 import React, { PropTypes } from 'react';
+import { connect } from 'react-redux';
+import { bindActionCreators} from 'redux';
 import { Arrow, Line, Stage, Layer, Group, Text, Rect } from 'react-konva';
+
+import { createSelector } from '../selectors';
+import { toggleSidebar } from '../actions';
 
 const f1 = x => 1 / (0.001 * x);
 const f2 = x => 50 * Math.sin(x * 0.1);
@@ -19,7 +24,7 @@ const TEXT_CONFIG = {
   fontSize: '16'
 };
 
-export default class GraphPage extends React.Component {
+export class GraphPage extends React.Component {
   constructor(...args) {
     super(...args);
 
@@ -29,6 +34,12 @@ export default class GraphPage extends React.Component {
 
     this.width;
     this.height;
+  }
+
+  componentWillMount() {
+    if (this.props.isSidebarVisible) {
+      this.props.actions.toggleSidebar();
+    }
   }
 
   componentDidMount() {
@@ -101,35 +112,6 @@ export default class GraphPage extends React.Component {
     );
   };
 
-  
-  drawInfo = (mounted) => {
-    return false;
-
-    return (
-      <Group>
-        <Rect
-          height={150}
-          stroke="black"
-          strokeWidth={1}
-          width={300}
-          x={this.width / 4}
-          y={this.height / 4}
-        >
-          <Text {...TEXT_CONFIG} text="12312313" />
-          <Rect
-            fill="grey"
-            height={10}
-            width={10}
-            x={20}
-            y={20}
-            stroke="black"
-            strokeWidth={1}
-          />
-        </Rect>
-      </Group>
-    );
-  };
-
   render() {
     const { mounted } = this.state;
 
@@ -140,7 +122,6 @@ export default class GraphPage extends React.Component {
             <Group ref={c => this.gr = c}>
               {this.drawInitials(mounted)}
               {this.drawGraphs(mounted)}
-              {this.drawInfo(mounted)}
             </Group>
           </Layer>
         </Stage>
@@ -148,3 +129,14 @@ export default class GraphPage extends React.Component {
     );
   }
 }
+
+const inputSelector = createSelector(
+  state => state.getIn(['ui', 'isSidebarVisible']),
+  isSidebarVisible => ({ isSidebarVisible })
+);
+
+const outputSelector = dispatch => ({
+  actions: bindActionCreators({ toggleSidebar }, dispatch)
+});
+
+export default connect(inputSelector, outputSelector)(GraphPage);

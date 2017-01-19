@@ -2,6 +2,7 @@ import React, { PropTypes } from 'react';
 
 import Reference from '../containers/Reference';
 import TreeVisualization from '../containers/TreeVisualization';
+import DeepVisualization from '../containers/DeepVisualization';
 
 export default class MapPage extends React.Component {
   static propTypes = {
@@ -14,7 +15,8 @@ export default class MapPage extends React.Component {
     const { params } = this.props;
     return (
       <div>
-        <TreeVisualization current={params.id} />
+        {/* <TreeVisualization current={params.id} /> */}
+        <DeepVisualization />
         <Reference />
       </div>
     );
